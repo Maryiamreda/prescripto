@@ -8,6 +8,7 @@ import About from './pages/About';
 import ProfilePage from './pages/MyProfile';
 import LogIn from './pages/Login';
 import NavBar from './components/Navbar';
+import MyAppointments from './pages/Appointment';
 
 function App() {
 
@@ -22,6 +23,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/my-profile" element={<ProfilePage />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/my-appointments" element={<MyAppointments />} />
+
 
 
       </Routes>
