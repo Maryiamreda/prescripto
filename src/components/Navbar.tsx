@@ -5,7 +5,7 @@ import DropDownIcon from "../assets/assets_frontend/dropdown_icon.svg";
 import { NavLink, useNavigate } from 'react-router-dom';
 const NavBar = () => {
     const navigate = useNavigate();
-    const [showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState(false);
     const [token, setToken] = useState(true)
 
     return (<div className='flex  items-center justify-between border-b pb-4 border-b-gray-400'>
@@ -33,21 +33,24 @@ const NavBar = () => {
         </div>
 
 
-        {token ? (<div>
-            <div className='flex gap-3'>
+        {token ? (
+            <div className='flex items-center gap-2 cursor-pointer'>
                 <img src={ProfilePic} className='w-10 rounded-full ' />
-                <img src={DropDownIcon} onClick={() => setShowMenu(showMenu ? false : true)} />
-            </div>
-            {showMenu &&
-                <div
-                    className='text-gray-600 text-base  bg-stone-100 absolute mt-5 p-4 flex flex-col items-center'
-                >
-                    <p onClick={() => navigate('/my-profile')}>My Profile</p>
-                    <p onClick={() => navigate('/my-appointments')} >My Appointments</p>
-                    <p onClick={() => navigate('/my-profile')}>Logout</p>
-                </div>
-            }
-        </div>)
+                <img src={DropDownIcon} className='' onClick={() => setShowMenu(!showMenu)} />
+
+                {showMenu &&
+                    <div
+                        className='text-gray-600 text-base font-medium absolute top-0 right-0 pt-20 pr-32 items-center'
+                    >
+                        <div className=' bg-stone-100 '>
+                            <p onClick={() => navigate('/my-profile')}>My Profile</p>
+                            <p onClick={() => navigate('/my-appointments')} >My Appointments</p>
+                            <p onClick={() => navigate('/my-profile')}>Logout</p>
+                        </div>
+
+                    </div>
+                }
+            </div>)
             : (<button onClick={() => navigate('/login')} className='bg-primary text-white  text-sm py-3 px-8 rounded-3xl'>Create account</button>)}
     </div>);
 }
