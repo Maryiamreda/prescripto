@@ -1,0 +1,32 @@
+
+import './App.css'
+import { Routes, Route } from "react-router-dom";
+import HomePage from './pages/Home';
+import DoctorsPage from './pages/Doctors';
+import ContactPage from './pages/Contact';
+import About from './pages/About';
+import ProfilePage from './pages/MyProfile';
+import LogIn from './pages/Login';
+import NavBar from './components/Navbar';
+
+function App() {
+
+  return (
+    <>
+      <NavBar />
+      <Routes>
+
+        <Route path="/" element={<HomePage />} />
+        <Route path="/doctors" element={<DoctorsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/my-profile" element={<ProfilePage />} />
+        <Route path="/login" element={<LogIn />} />
+
+
+      </Routes>
+    </>
+  )
+}
+
+export default App
