@@ -8,7 +8,8 @@ import About from './pages/About';
 import ProfilePage from './pages/MyProfile';
 import LogIn from './pages/Login';
 import NavBar from './components/Navbar';
-import MyAppointments from './pages/Appointment';
+import Appointments from './pages/Appointment';
+import MyAppointments from './pages/MyAppointment';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/my-profile" element={<ProfilePage />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/appointments" element={<Appointments />} />
         <Route path="/my-appointments" element={<MyAppointments />} />
 
 

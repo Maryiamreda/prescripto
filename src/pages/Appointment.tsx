@@ -1,5 +1,5 @@
-const MyAppointments = () => {
+const Appointments = () => {
     return (<></>);
 }
 
-export default MyAppointments;
+export default Appointments;

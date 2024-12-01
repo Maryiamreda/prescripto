@@ -8,6 +8,11 @@ const NavBar = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [token, setToken] = useState(true)
 
+    const toggleMenu = (e: { stopPropagation: () => void; }) => {
+        e.stopPropagation(); // Prevent event propagation
+        setShowMenu(!showMenu);
+    };
+
     return (<div className='flex  items-center justify-between border-b pb-4 border-b-gray-400'>
         <img src={Logo} className='w-44' />
         <div>
@@ -34,18 +39,18 @@ const NavBar = () => {
 
 
         {token ? (
-            <div className='flex items-center gap-2 cursor-pointer'>
+            <div className='flex items-center gap-2 cursor-pointer' onClick={toggleMenu}>
                 <img src={ProfilePic} className='w-10 rounded-full ' />
-                <img src={DropDownIcon} className='' onClick={() => setShowMenu(!showMenu)} />
+                <img src={DropDownIcon} className='' />
 
-                {showMenu &&
+                {showMenu == true &&
                     <div
-                        className='text-gray-600 text-base font-medium absolute top-0 right-0 pt-20 pr-32 items-center'
+                        className='text-gray-600 text-base font-medium absolute top-0 right-0 pt-20 pr-[10%] '
                     >
-                        <div className=' bg-stone-100 '>
-                            <p onClick={() => navigate('/my-profile')}>My Profile</p>
-                            <p onClick={() => navigate('/my-appointments')} >My Appointments</p>
-                            <p onClick={() => navigate('/my-profile')}>Logout</p>
+                        <div className='min-w-48 rounded p-4 gap-4 bg-stone-50 flex flex-col items-start '>
+                            <p onClick={() => navigate('/my-profile')} className='hover:text-black'>My Profile</p>
+                            <p onClick={() => navigate('/my-appointments')} className='hover:text-black' >My Appointments</p>
+                            <p onClick={() => setToken(false)} className='hover:text-black'>Logout</p>
                         </div>
 
                     </div>
