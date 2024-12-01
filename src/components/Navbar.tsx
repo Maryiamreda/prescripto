@@ -36,8 +36,6 @@ const NavBar = () => {
 
             </ul>
         </div>
-
-
         {token ? (
             <div className='flex items-center gap-2 cursor-pointer' onClick={toggleMenu}>
                 <img src={ProfilePic} className='w-10 rounded-full ' />
