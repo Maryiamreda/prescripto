@@ -10,6 +10,7 @@ import LogIn from './pages/Login';
 import NavBar from './components/Navbar';
 import Appointments from './pages/Appointment';
 import MyAppointments from './pages/MyAppointment';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
 
 
       </Routes>
+      <Footer />
     </>
   )
 }
