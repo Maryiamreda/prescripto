@@ -2,10 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import Image from '../assets/assets_frontend/appointment_img.png';
 const Banner = () => {
     //  md:h-[60vh] justify-between md:flex md:flex-row flex-colpx-6 sm:
+    // md:h-[311px]
     const navigate = useNavigate();
 
     return (
-        <div className="bg-primary  rounded-lg  md:h-[311px] sm:px-10 md:px-10  my-20 flex justify-between">
+        <div className="bg-primary  rounded-lg sm:px-10 md:px-10  my-20 flex justify-between">
 
             <div className='flex-1 py-8 pl-[25px] md:py-20' >
                 <h1
@@ -19,7 +20,7 @@ const Banner = () => {
 
             </div>
             {/* //md:w-[35%] */}
-            <div className="hidden lg:block lg:w-[35%] relative">
+            <div className="hidden lg:block lg:w-[35%] relative mr-20">
                 <img src={Image} className='w-full absolute bottom-0 right-0 max-w-md' />
 
             </div>
