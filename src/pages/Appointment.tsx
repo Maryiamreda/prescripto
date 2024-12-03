@@ -38,7 +38,6 @@ const Appointments = () => {
                 currentDate.setHours(10)
                 currentDate.setMinutes(0)
 
-
             }
             let timeSlots = []
             while (currentDate < endTime) {
@@ -90,21 +89,34 @@ const Appointments = () => {
 
                     </div>
                 </div>
-                <div>
-                    <h3>Booking slots</h3>
-                    <div className="flex ">
-                        {doctorSlots.length && doctorSlots.map((item, index) => (
-                            <div onClick={() => setSlotIndex(index)} className="cursor-pointer" key={index}>
-                                <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
-                                <p>{item[0] && item[0].datetime.getDate()}</p>
-                            </div>
-                        ))}
+                <div className="sm:ml-72 sm:pl-4 mt-8 font-medium text-[#565656] overflow-x-hidden">
+                    <div>
+                        <h3>Booking slots</h3>
+                        <div className="flex gap-3 items-center w-full overflow-x-auto  mt-4">
+                            {doctorSlots.length &&
+                                doctorSlots.map((item, index) => (
+                                    <div
+                                        onClick={() => setSlotIndex(index)}
+                                        className={`cursor-pointer text-center py-6 min-w-16 rounded-full ${slotIndex === index ? 'bg-primary text-white' : 'border border-gray-200 text-gray-700'}`}
+
+                                        key={index}
+                                    >
+                                        <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
+                                        <p>{item[0] && item[0].datetime.getDate()}</p>
+                                    </div>
+                                ))}
+                        </div>
                     </div>
-                </div>
-                <div>
-                    {doctorSlots.length && doctorSlots[slotIndex].map((item, index) => (<div>
-                        <p>{item.time.toLowerCase()}</p>
-                    </div>))}
+                    <div className="flex items-center gap-3 w-full overflow-x-scroll  mt-4">
+                        {doctorSlots.length &&
+                            doctorSlots[slotIndex].map((item, index) => (
+                                <div key={index}>
+                                    <p className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer text-[#949494] border border-[#B4B4B4] `}>
+                                        {item.time.toLowerCase()}
+                                    </p>
+                                </div>
+                            ))}
+                    </div>
                 </div>
             </div>
         </div>);
