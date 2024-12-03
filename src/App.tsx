@@ -27,7 +27,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/my-profile" element={<ProfilePage />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/appointments/:docId" element={<Appointments />} />
+        <Route path="/appointments/:doctorId" element={<Appointments />} />
 
         <Route path="/my-appointments" element={<MyAppointments />} />
 
