@@ -92,16 +92,20 @@ const Appointments = () => {
                 </div>
                 <div>
                     <h3>Booking slots</h3>
-                    <div>
+                    <div className="flex ">
                         {doctorSlots.length && doctorSlots.map((item, index) => (
-                            <div key={index}>
+                            <div onClick={() => setSlotIndex(index)} className="cursor-pointer" key={index}>
                                 <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                                 <p>{item[0] && item[0].datetime.getDate()}</p>
                             </div>
                         ))}
                     </div>
                 </div>
-
+                <div>
+                    {doctorSlots.length && doctorSlots[slotIndex].map((item, index) => (<div>
+                        <p>{item.time.toLowerCase()}</p>
+                    </div>))}
+                </div>
             </div>
         </div>);
 }
