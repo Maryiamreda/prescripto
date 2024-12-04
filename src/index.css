@@ -10,3 +10,29 @@
 html {
     scroll-behavior: smooth;
   }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hidden {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Add this to your styling */
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px; /* Adjust the spacing between items as needed */
+  white-space: nowrap; /* Prevents wrapping */
+}
+.time-slot {
+  flex-shrink: 0; /* Prevents shrinking */
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 9999px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  color: #949494;
+}
