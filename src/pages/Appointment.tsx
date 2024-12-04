@@ -4,6 +4,7 @@ import { doctors } from '../assets/assets_frontend/assets'
 import { Doctor } from "../Doctors";
 import Verified from '../assets/assets_frontend/verified_icon.svg';
 import Info from '../assets/assets_frontend/info_icon.svg';
+import Relatedoctors from "../components/Relatedoctors";
 
 const Appointments = () => {
     const { doctorId } = useParams<{ doctorId: string }>();
@@ -30,7 +31,7 @@ const Appointments = () => {
             //setting hours
             if (today.getDate() === currentDate.getDate()) {
                 currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10)
-                currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0)
+                currentDate.setMinutes(currentDate.getHours() > 30 ? 30 : 0)
                 // the start time is adjusted to be no earlier than 10:00 AM.
                 // If the current time is already past 10:00 AM, it moves to the next available hour.
 
@@ -65,40 +66,39 @@ const Appointments = () => {
     useEffect(() => { getAvailableSlots() }, [doctor])
     useEffect(() => { console.log(doctorSlots) }, [doctorSlots])
     return (
-        <div>
-            <div className="mt-5">
-                <div className="flex gap-5 ">
+        <div className=" ">
+            <div className="mt-5 ">
+                <div className="flex flex-col md:flex-row gap-5 ">
                     <img src={doctor?.image} className="bg-primary sm:max-w-72 rounded-lg " alt={doctor?.name} />
-                    <div className="text-start rounded-lg p-8  border border-[#ADADAD]">
-                        <div className="flex gap-2 text-3xl font-medium text-gray-700 ">
+                    <div className="flex-1  border border-[#ADADAD] rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
+                        <div className="flex md:justify-start gap-2 text-3xl font-medium text-gray-700 ">
                             <h1>{doctor?.name}</h1>
                             <img src={Verified} className="w-5" />
                         </div>
-                        <div className="flex mt-1 gap-2 text-gray-600">
+                        <div className="flex md:justify-start mt-1 gap-2 text-gray-600">
                             <h3 className="">{doctor?.degree} - {doctor?.speciality}</h3>
 
                             <div className="text-xs flex items-center rounded-xl px-2  border border-gray-200 cursor-pointer">{doctor?.experience}</div>
                         </div>
-                        <div>
+                        <div >
                             <div className="flex gap-1 mt-2">
                                 <h3>About</h3>
                                 <img src={Info} className="w-3 text-sm" /></div>
-                            <p className="text-gray-600 text-sm mt-1 max-w-[700px] leading-relaxed">{doctor?.about}</p>
+                            <p className="text-gray-600 text-start text-sm mt-1 max-w-[700px] leading-relaxed">{doctor?.about}</p>
                         </div>
-                        <h1 className=" text-gray-700 font-medium mt-5">Appointment fee: <span className="text-black">${doctor?.fees}</span></h1>
+                        <h1 className=" text-gray-700 text-start font-medium mt-5">Appointment fee: <span className="text-black">${doctor?.fees}</span></h1>
 
                     </div>
                 </div>
                 <div className="sm:ml-72 sm:pl-4 mt-8 font-medium text-[#565656] overflow-x-hidden">
                     <div>
-                        <h3>Booking slots</h3>
-                        <div className="flex gap-3 items-center w-full overflow-x-auto  mt-4">
+                        <h3 className="text-start">Booking slots</h3>
+                        <div className="flex gap-3 items-center w-full overflow-x-auto scrollbar-hidden  mt-4">
                             {doctorSlots.length &&
                                 doctorSlots.map((item, index) => (
                                     <div
                                         onClick={() => setSlotIndex(index)}
                                         className={`cursor-pointer text-center py-6 min-w-16 rounded-full ${slotIndex === index ? 'bg-primary text-white' : 'border border-gray-200 text-gray-700'}`}
-
                                         key={index}
                                     >
                                         <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
@@ -107,18 +107,25 @@ const Appointments = () => {
                                 ))}
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 w-full overflow-x-scroll  mt-4">
+                    <div className="flex overflow-x-auto gap-3 whitespace-nowrap scrollbar-hidden mt-4">
                         {doctorSlots.length &&
                             doctorSlots[slotIndex].map((item, index) => (
-                                <div key={index}>
-                                    <p className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer text-[#949494] border border-[#B4B4B4] `}>
+                                <div
+                                    key={index}
+                                    onClick={() => setSlotTime(item.time)}
+                                >
+                                    <p className={`flex-shrink-0 px-5 py-2 rounded-full cursor-pointer text-sm 
+                                        ${item.time === slotTime ? 'bg-primary text-white' : 'text-gray-400 border border-gray-300'}`}>
                                         {item.time.toLowerCase()}
                                     </p>
                                 </div>
                             ))}
                     </div>
+                    <button className=" flex bg-primary text-white text-sm font-light px-14 py-3  rounded-full my-6">Book an Appointment</button>
                 </div>
             </div>
+
+            <Relatedoctors doctorId={doctorId} speciality={doctor?.speciality} />
         </div>);
 }
 export default Appointments;
