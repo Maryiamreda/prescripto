@@ -10,7 +10,7 @@ const TopDoctors = () => {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {doctors.slice(0, 10).map((doctor) => (
-                    <div onClick={() => navigate(`/appointment/${doctor._id}`)} className='border border-blue-200 overflow-hidden rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
+                    <div onClick={() => { window.scrollTo(0, 0); navigate(`/appointments/${doctor._id}`) }} className='border border-blue-200 overflow-hidden rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
                         <img className='bg-blue-50' src={doctor.image} />
                         <div className='p-5'>
                             <div className='flex items-center text-center gap-2'> <p className='bg-green-500 rounded-full w-2 h-2 '></p><p className='text-green-500 text-sm'>Available</p>

@@ -14,8 +14,12 @@ const Banner = () => {
                 >Book Appointment
                     <br />
                     With 100+ Trusted Doctors</h1>
-                <a onClick={() => navigate('/login')}
-                    className='flex text-gray-600 bg-white w-40  text-sm justify-center px-8 py-3 mt-8 items-center rounded-full hover:cursor-pointer hove:scale-105 transition-all'
+                <a
+                    onClick={() => {
+                        navigate('/login'); // Navigates to the login page
+                        window.scrollTo(0, 0); // Scrolls to the top of the page
+
+                    }} className='flex text-gray-600 bg-white w-40  text-sm justify-center px-8 py-3 mt-8 items-center rounded-full hover:cursor-pointer hove:scale-105 transition-all'
                 ><p>Create account</p></a>
 
             </div>

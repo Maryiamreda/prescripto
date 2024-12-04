@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Logo from '../assets/assets_frontend/logo.svg';
-import ProfilePic from '../assets/assets_frontend/profile_pic.png';
+import ProfilePic from '../assets/assets_frontend/profile_pic.jpg';
 import DropDownIcon from "../assets/assets_frontend/dropdown_icon.svg";
 import { NavLink, useNavigate } from 'react-router-dom';
 const NavBar = () => {
