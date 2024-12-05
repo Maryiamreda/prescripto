@@ -17,7 +17,7 @@ const NavBar = () => {
     };
 
     return (<div className='flex  items-center justify-between border-b pb-4 border-b-gray-400'>
-        <img onClick={() => navigate('/')} src={Logo} className='w-44 hover:cursor-pointer' />
+        <img onClick={() => navigate('/')} src={Logo} className='w-36 hover:cursor-pointer' />
         <div>
             <ul className='hidden md:inline-flex gap-5 font-medium'>
                 <NavLink to="/">
@@ -41,7 +41,7 @@ const NavBar = () => {
         </div>
         {token ? (
             <div className='flex items-center gap-2 cursor-pointer' onClick={toggleMenu}>
-                <img src={ProfilePic} className='w-10 rounded-full ' />
+                <img src={ProfilePic} className='w-8 rounded-full ' />
                 <img src={DropDownIcon} className='' />
 
                 {showMenu == true &&
