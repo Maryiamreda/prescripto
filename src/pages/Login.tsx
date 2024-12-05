@@ -3,13 +3,13 @@ import { useState } from "react";
 const LogIn = () => {
     const [state, setState] = useState('Sign Up')
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [password] = useState('')
     const [name, setName] = useState('')
 
-    const onSubmitHandler = async (event: React.FormEvent) => {
-        event.preventDefault()
+    // const onSubmitHandler = async (event: React.FormEvent) => {
+    //     event.preventDefault()
 
-    }
+    // }
     const toggleState = () => {
         setState(state === 'Sign Up' ? 'Log In' : 'Sign Up');
     };

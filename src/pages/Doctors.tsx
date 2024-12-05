@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { doctors } from '../assets/assets_frontend/assets'
 import { specialityData } from '../assets/assets_frontend/assets'
 
