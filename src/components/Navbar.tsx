@@ -9,11 +9,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 const NavBar = () => {
     const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(false);
+
     const [token, setToken] = useState(true)
 
     const toggleMenu = (e: { stopPropagation: () => void; }) => {
         e.stopPropagation(); // Prevent event propagation
-        setShowMenu(!showMenu);
+        setSelectedOption(!selectedOption);
     };
 
     return (<div className='flex  items-center justify-between border-b pb-4 border-b-gray-400'>
@@ -44,7 +46,7 @@ const NavBar = () => {
                 <img src={ProfilePic} className='w-8 rounded-full ' />
                 <img src={DropDownIcon} className='' />
 
-                {showMenu == true &&
+                {selectedOption == true &&
                     <div
                         className='text-gray-600 text-base font-medium absolute top-0 right-0 pt-20 pr-[10%] '
                     >
@@ -57,7 +59,9 @@ const NavBar = () => {
                     </div>
                 }
             </div>)
-            : (<button onClick={() => navigate('/login')} className='bg-primary text-white  text-sm py-3 px-8 rounded-3xl'>Create account</button>)}
+            : (<button onClick={() => navigate('/login')} className='bg-primary text-white  text-sm py-3 px-8 rounded-3xl'>Create account</button>)
+        }
+
         <img onClick={() => setShowMenu(true)} className="w-6 md:hidden" src={MenuIcon} />
         {/* //mobile menu */}
         <div className={`${showMenu ? "fixed w-full" : "h-0 w-0"}  md:hidden  right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>
