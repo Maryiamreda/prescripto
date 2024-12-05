@@ -17,12 +17,12 @@ const ProfilePage = () => {
     })
     const [isEdit, setIsEdit] = useState(false)
     return (
-        <div className="max-w-lg flex flex-col gap-2 text-sm text-start">
+        <div className="max-w-lg mt-10 flex flex-col gap-2 text-sm text-start">
             <img className="w-36 rounded" src={userData.image} />
             {
                 isEdit ?
                     <input
-                        className="bg-gray-50 text-3xl font-medium max-w-60"
+                        className="bg-gray-50 text-xl font-medium max-w-60"
                         type="text"
                         value={userData.name}
                         onChange={e => setUserData(prev => ({ ...prev, name: e.target.value }))}
@@ -32,35 +32,35 @@ const ProfilePage = () => {
 
             }
             <hr className="bg-zinc-400 h-[1px] border-none" />
-            <div>
-                <h2>CONTACT INFORMATION</h2>
-                <div>
-                    <h3>Email id:</h3>
-                    <p>{userData.email}</p>
+            <div >
+                <h2 className="text-neutral-500 underline mt-3">CONTACT INFORMATION</h2>
+                <div className="flex gap-3">
+                    <h3 className="font-medium">Email id:</h3>
+                    <p className="text-blue-500">{userData.email}</p>
                 </div>
-                <div>
+                <div className="flex gap-3">
                     <h3>Phone:</h3>
                     {
                         isEdit ?
                             <input
-                                className="bg-gray-50 text-3xl font-medium max-w-60"
+                                className="bg-gray-50 text-xl font-medium max-w-60"
 
                                 type="text"
                                 value={userData.phone}
                                 onChange={e => setUserData(prev => ({ ...prev, phone: e.target.value }))}
                             />
                             :
-                            <p>{userData.phone}</p>
+                            <p className="text-blue-400">{userData.phone}</p>
                     }
 
                 </div>
-                <div>
+                <div className="flex gap-3 ">
                     <h3>Address:</h3>
                     {
                         isEdit ?
-                            <div>
+                            <div className="flex flex-col gap-2 mt-2 ">
                                 <input
-                                    className="bg-gray-50 text-3xl font-medium max-w-60"
+                                    className="bg-gray-50 text-xl font-medium max-w-60"
 
                                     type="text"
                                     value={userData.address.line1}
@@ -72,9 +72,9 @@ const ProfilePage = () => {
                                         }
                                     }))}
                                 />
-                                <br />
+
                                 <input
-                                    className="bg-gray-50 text-3xl font-medium max-w-60"
+                                    className="bg-gray-50 text-xl font-medium max-w-60"
 
                                     type="text"
                                     value={userData.address.line2}
@@ -88,17 +88,20 @@ const ProfilePage = () => {
                                 />
                             </div>
                             :
-                            <p>
-                                {userData.address.line1}
-                                <br />
-                                {userData.address.line2}
-                            </p>
+                            <div className="flex flex-col gap-1">
+                                <p>                                {userData.address.line1}
+                                </p>
+
+                                <p>{userData.address.line2}</p>
+
+
+                            </div>
                     }
                 </div>
             </div>
             <div>
-                <h2>BASIC INFORMATION</h2>
-                <div>
+                <h2 className="text-neutral-500 underline mt-3">BASIC INFORMATION</h2>
+                <div className="flex gap-3">
                     <h3>Gender:</h3>
                     {
                         isEdit ?
@@ -116,12 +119,12 @@ const ProfilePage = () => {
                     }
 
                 </div>
-                <div>
+                <div className="flex gap-3">
                     <h3>Birthdaydate:</h3>
                     {
                         isEdit ?
                             <input
-                                className="bg-gray-50 text-3xl font-medium max-w-60"
+                                className="bg-gray-50 text-xl font-medium max-w-60"
 
                                 type="text"
                                 value={userData.dob}
