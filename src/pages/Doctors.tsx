@@ -46,7 +46,7 @@ const DoctorsPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
                     {data.map((doctor, index) => (
-                        <Link to={`/appointments/${doctor._id}`} key={index} className='border border-blue-200 overflow-hidden rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
+                        <Link to={`/appointments/${doctor._id}`} onClick={() => { window.scrollTo(0, 0); }} key={index} className='border border-blue-200 overflow-hidden rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
                             <img className='bg-blue-50' src={doctor.image} />
                             <div className='px-5 py-2 text-start'>
                                 <div className='flex items-center text-center gap-2'> <p className='bg-green-500 rounded-full w-2 h-2 '></p><p className='text-green-500 text-sm'>Available</p>
