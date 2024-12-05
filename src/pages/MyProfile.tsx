@@ -17,7 +17,7 @@ const ProfilePage = () => {
     })
     const [isEdit, setIsEdit] = useState(false)
     return (
-        <div className="max-w-lg mt-10 flex flex-col gap-2 text-sm text-start">
+        <div className="max-w-lg mt-10 mb-36 flex  text-[#363636] flex-col gap-2 text-sm text-start">
             <img className="w-36 rounded" src={userData.image} />
             {
                 isEdit ?
@@ -32,14 +32,14 @@ const ProfilePage = () => {
 
             }
             <hr className="bg-zinc-400 h-[1px] border-none" />
-            <div >
+            <div className="flex flex-col gap-4"  >
                 <h2 className="text-neutral-500 underline mt-3">CONTACT INFORMATION</h2>
-                <div className="flex gap-3">
+                <div className="flex gap-16">
                     <h3 className="font-medium">Email id:</h3>
                     <p className="text-blue-500">{userData.email}</p>
                 </div>
-                <div className="flex gap-3">
-                    <h3>Phone:</h3>
+                <div className="flex gap-16">
+                    <h3 className="font-medium">Phone:</h3>
                     {
                         isEdit ?
                             <input
@@ -54,8 +54,8 @@ const ProfilePage = () => {
                     }
 
                 </div>
-                <div className="flex gap-3 ">
-                    <h3>Address:</h3>
+                <div className="flex gap-16">
+                    <h3 className="font-medium">Address:</h3>
                     {
                         isEdit ?
                             <div className="flex flex-col gap-2 mt-2 ">
@@ -99,13 +99,14 @@ const ProfilePage = () => {
                     }
                 </div>
             </div>
-            <div>
+            <div className="flex flex-col gap-4 text-neutral-700">
                 <h2 className="text-neutral-500 underline mt-3">BASIC INFORMATION</h2>
-                <div className="flex gap-3">
-                    <h3>Gender:</h3>
+                <div className="flex gap-16">
+                    <h3 className="font-medium">Gender:</h3>
                     {
                         isEdit ?
                             <select
+                                className="max-w-20 bg-gray-100"
                                 value={userData.gender}
                                 onChange={e => setUserData(prev => ({ ...prev, gender: e.target.value }))}
                             >
@@ -115,29 +116,29 @@ const ProfilePage = () => {
                             </select>
 
                             :
-                            <p>{userData.gender}</p>
+                            <p className="text-gray-400">{userData.gender}</p>
                     }
 
                 </div>
-                <div className="flex gap-3">
-                    <h3>Birthdaydate:</h3>
+                <div className="flex gap-16">
+                    <h3 className="font-medium">Birthdaydate:</h3>
                     {
                         isEdit ?
                             <input
                                 className="bg-gray-50 text-xl font-medium max-w-60"
 
-                                type="text"
+                                type="date"
                                 value={userData.dob}
                                 onChange={e => setUserData(prev => ({ ...prev, dob: e.target.value }))}
                             />
                             :
-                            <p>{userData.dob}</p>
+                            <p className="text-gray-400">{userData.dob}</p>
                     }
 
                 </div>
             </div>
-            <div>
-                {isEdit ? <button onClick={() => setIsEdit(false)}>save information</button> : <button onClick={() => setIsEdit(true)}>Edit</button>}
+            <div className="mt-10">
+                {isEdit ? <button className="border border-primary px-8 py-2  rounded-full hover:bg-primary hover:text-white transition-all" onClick={() => setIsEdit(false)}>save information</button> : <button className="border border-primary px-8 py-2  rounded-full  hover:bg-primary hover:text-white transition-all" onClick={() => setIsEdit(true)}>Edit</button>}
             </div>
         </div>
     );
