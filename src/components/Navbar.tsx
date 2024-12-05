@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import Logo from '../assets/assets_frontend/logo.svg';
 import ProfilePic from '../assets/assets_frontend/profile_pic.jpg';
+import MenuIcon from '../assets/assets_frontend/menu_icon.svg';
+import CrossIcon from '../assets/assets_frontend/cross_icon.png';
+
 import DropDownIcon from "../assets/assets_frontend/dropdown_icon.svg";
 import { NavLink, useNavigate } from 'react-router-dom';
 const NavBar = () => {
@@ -16,7 +19,7 @@ const NavBar = () => {
     return (<div className='flex  items-center justify-between border-b pb-4 border-b-gray-400'>
         <img onClick={() => navigate('/')} src={Logo} className='w-44 hover:cursor-pointer' />
         <div>
-            <ul className='inline-flex gap-5 font-medium'>
+            <ul className='hidden md:inline-flex gap-5 font-medium'>
                 <NavLink to="/">
                     <li className='py-1 text-sm '>HOME</li>
                     <hr className='bg-primary  border-none  outline-none h-0.5 m-auto w-3/5 hidden' />
@@ -55,6 +58,28 @@ const NavBar = () => {
                 }
             </div>)
             : (<button onClick={() => navigate('/login')} className='bg-primary text-white  text-sm py-3 px-8 rounded-3xl'>Create account</button>)}
+        <img onClick={() => setShowMenu(true)} className="w-6 md:hidden" src={MenuIcon} />
+        {/* //mobile menu */}
+        <div className={`${showMenu ? "fixed w-full" : "h-0 w-0"}  md:hidden  right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>
+            <div className='flex items-center justify-between px-5 py-6'>
+                <img src={Logo} className='w-36' />
+                <img onClick={() => setShowMenu(false)} className='w-7' src={CrossIcon} />
+            </div>
+            <ul className='flex flex-col gap-2 mt-5 px-5 text-lg font-medium'>
+                <NavLink onClick={() => setShowMenu(false)} to="/">
+                    <li className='py-1 text-sm '>HOME</li>
+                </NavLink>
+                <NavLink onClick={() => setShowMenu(false)} to="/doctors">
+                    <li className='py-1 text-sm'>ALL DOCTORS</li>
+                </NavLink>
+                <NavLink onClick={() => setShowMenu(false)} to="/about">
+                    <li className='py-1 text-sm'>ABOUT</li>
+                </NavLink>
+                <NavLink onClick={() => setShowMenu(false)} to="/contact">
+                    <li className='py-1 text-sm'>CONTACT</li>
+                </NavLink>
+            </ul>
+        </div>
     </div>);
 }
 

@@ -36,3 +36,9 @@ html {
   font-size: 14px;
   color: #949494;
 }
+
+@media(max-width:740px){
+  .active p{
+    @apply bg-primary  text-white
+  }
+}
