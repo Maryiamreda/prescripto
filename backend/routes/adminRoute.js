@@ -1,11 +1,14 @@
 
 import express from 'express'
-import { addDoctor } from '../controllers/adminController.js'
+import { addDoctor, logInAdmin } from '../controllers/adminController.js'
 import upload from '../middleware/multer.js'
+import authAdmin from '../middleware/authAdmin.js'
 
 const adminRouter = express.Router()
 
-adminRouter.post('/add-doctor', upload.single('image'), addDoctor)
+adminRouter.post('/add-doctor', authAdmin, upload.single('image'), addDoctor)
+
+adminRouter.post('/login', logInAdmin)
 
 export default adminRouter;
 //This code sets up an Express router for admin functionalities. It creates a POST route at '/add-doctor' that:
