@@ -3,6 +3,7 @@ import cors from 'cors'
 import 'dotenv/config'
 import connectDB from './config/mongodb.js';
 import connectCloudinary from './config/cloudinary.js';
+import adminRouter from './routes/adminRoute.js';
 //app config
 const app = express();
 const port = process.env.PORT || 4000
@@ -16,4 +17,7 @@ app.get('/', (req, res) => {
     res.send('API WORKING')
 
 })
-app.listen(port, () => console.log("Server Start"))
+app.use('/api/admin', adminRouter);
+//All routes defined in adminRouter will be prefixed with /api/admin
+//For example, when you defined adminRouter.post('/add-doctor',...), the full route becomes:/api/admin/add-doctor
+app.listen(port, () => console.log("Server Start"));
