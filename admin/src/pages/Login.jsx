@@ -22,8 +22,8 @@ const Login = () => {
                 if (data.success) {
                     setAToken(data.token); // Set token in context
 
-                    // You might want to store the token in localStorage or context
-                    localStorage.setItem('token', data.token);
+                    // saves the token in the browser's local storage, making it persist across page reloads.
+                    localStorage.setItem('aToken', data.token);
                     // You could also add navigation here, e.g.:
                     // navigate('/dashboard');
                 } else {
@@ -61,5 +61,18 @@ const Login = () => {
         </form>
     );
 }
+
+
+//Summary of Execution Flow
+//Login Attempt:
+//Form submission → API request → Token received.
+//Token Stored:
+//localStorage.setItem('aToken', data.token) saves the token.
+// setAToken(data.token) updates the context state.
+// Re-render:
+// Context state change triggers React re-render.
+// App renders the appropriate component based on aToken.
+// Persistence:
+// On reload, AdminContextProvider checks localStorage and restores aToken.
 
 export default Login;
