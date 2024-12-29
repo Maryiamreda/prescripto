@@ -12,7 +12,7 @@ const AddDoctor = () => {
     const [experience, setExperience] = useState('1 Year');
     const [fees, setFees] = useState('');
     const [about, setAbout] = useState('');
-    const [speciality, setSpeciality] = useState('General physician');
+    const [specialty, setSpecialty] = useState('General physician');
     const [degree, setDegree] = useState('');
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
@@ -20,8 +20,16 @@ const AddDoctor = () => {
     const onSubmitHandler = async (event) => {
         event.preventDefault();
         try {
-            if (!docImg) return toast.error('Image Not Selected')
-            const formData = new FormData()
+            // Validate all required fields
+            if (!name || !email || !password || !degree || !fees || !about || !address1) {
+                return toast.error('Please fill all required fields');
+            }
+
+            if (!docImg) {
+                return toast.error('Image Not Selected');
+            }
+
+            const formData = new FormData();
             formData.append('image', docImg);
             formData.append('name', name);
             formData.append('email', email);
@@ -29,24 +37,45 @@ const AddDoctor = () => {
             formData.append('experience', experience);
             formData.append('fees', Number(fees));
             formData.append('about', about);
-            formData.append('speciality', speciality);
+            formData.append('specialty', specialty);
             formData.append('degree', degree);
-            formData.append('address', JSON.stringify({ line1: address1, line2: address2 }));
-            formData.forEach((element, key) => {
-                console.log(`${key}:${element}`)
+            formData.append('address', JSON.stringify({
+                line1: address1,
+                line2: address2 || '' // Make line2 optional
+            }));
 
+            // Debug log
+            formData.forEach((value, key) => {
+                console.log(`${key}:`, value);
             });
 
-            const { data } = await axios.post(backendUrl + '/api/admin/add-doctor', formData, { headers: { aToken } });
+            const { data } = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {
+                headers: {
+                    'atoken': aToken,
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
             if (data.success) {
-                toast.success(data.message)
-
+                toast.success(data.message);
+                // Clear form
+                setName('');
+                setEmail('');
+                setPassword('');
+                setDegree('');
+                setFees('');
+                setAbout('');
+                setAddress1('');
+                setAddress2('');
+                setDocImg(false);
             } else {
-                toast.error(data.message)
-
+                toast.error(data.message);
             }
-        } catch (error) { }
-    }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error(error.message || 'Error adding doctor');
+        }
+    };
 
     return (
         <form onSubmit={onSubmitHandler} className='m-5 w-full text-start'>
@@ -127,8 +156,8 @@ const AddDoctor = () => {
                             <label>Speciality</label>
                             <select
                                 className='border rounded px-3 py-2'
-                                value={speciality}
-                                onChange={(e) => setSpeciality(e.target.value)}
+                                value={specialty}
+                                onChange={(e) => setSpecialty(e.target.value)}
                             >
                                 <option value="" disabled>Select speciality</option>
                                 <option value="General physician">General physician</option>
