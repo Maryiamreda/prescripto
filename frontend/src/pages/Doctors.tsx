@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { doctors } from '../assets/assets_frontend/assets'
 import { specialityData } from '../assets/assets_frontend/assets'
+import { AppContext } from "../context/AppContext";
 
 const DoctorsPage = () => {
+    const { doctors } = useContext(AppContext);
+    console.log("Doctors from context:", doctors);
+
     const { speciality } = useParams(); // Extract docId
     const [data, setData] = useState(doctors)
     const [showFilters, setShowFilters] = useState(false)
@@ -15,7 +19,7 @@ const DoctorsPage = () => {
             // Reset to all doctors if no speciality is selected
             setData(doctors);
         }
-    }, [speciality])
+    }, [speciality, doctors]); // Added doctors as dependency
 
     return (
         <div className=" text-gray-600   mb-20">
@@ -45,18 +49,28 @@ const DoctorsPage = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-                    {data.map((doctor, index) => (
-                        <Link to={`/appointments/${doctor._id}`} onClick={() => { window.scrollTo(0, 0); }} key={index} className='border border-blue-200 overflow-hidden w-fit rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
-                            <img className='bg-blue-50' src={doctor.image} />
+                    {data && data.map((doctor, index) => (
+                        <Link
+                            to={`/appointments/${doctor._id}`}
+                            onClick={() => { window.scrollTo(0, 0); }}
+                            key={`doctor-${doctor._id || index}`}
+                            className='border border-blue-200 overflow-hidden w-fit rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500'
+                        >
+                            <img
+                                className='bg-blue-50'
+                                src={doctor.image}
+                                alt={`Dr. ${doctor.name}`}
+                            />
                             <div className='px-5 py-2 text-start'>
-                                <div className='flex items-center text-center gap-2'> <p className='bg-green-500 rounded-full w-2 h-2 '></p><p className='text-green-500 text-sm'>Available</p>
+                                <div className='flex items-center text-center gap-2'>
+                                    <p className='bg-green-500 rounded-full w-2 h-2'></p>
+                                    <p className='text-green-500 text-sm'>Available</p>
                                 </div>
                                 <h2 className='text-base font-semibold'>{doctor.name}</h2>
                                 <p className='text-gray-600 text-sm'>{doctor.speciality}</p>
                             </div>
-
-                        </Link>)
-                    )} </div>
+                        </Link>
+                    ))}</div>
             </div>
 
         </div>);

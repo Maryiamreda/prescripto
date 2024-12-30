@@ -75,6 +75,7 @@ const logInAdmin = async (req, res) => {
     }
 }
 //api to get doctors 
+
 const allDoctors = async (req, res) => {
     try {
         const doctors = await doctorModel.find({}).select('-password');
