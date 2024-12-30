@@ -9,9 +9,11 @@ const authAdmin = async (req, res, next) => {
         }
         //to verify this token we have to decode this token 
         const token_decode = jwt.verify(atoken, process.env.JWT_SECRET)
-        if (token_decode != process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD) {
-            res.json({ success: false, message: "Not Autherized Login Again" })
+        // Check if the decoded email matches the admin's email
+        if (token_decode.email !== process.env.ADMIN_EMAIL) {
+            return res.status(403).json({ success: false, message: "Not Authorized. Login Again." });
         }
+
         next(); //this's like a "continue" button in Express middleware:
 
     }

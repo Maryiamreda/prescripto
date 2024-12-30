@@ -22,10 +22,12 @@ const Login = () => {
                 if (data.success) {
                     setAToken(data.token); // Set token in context
 
+
                     // saves the token in the browser's local storage, making it persist across page reloads.
                     localStorage.setItem('aToken', data.token);
                     // You could also add navigation here, e.g.:
                     // navigate('/dashboard');
+
                 } else {
                     toast.error(data.message)
 
