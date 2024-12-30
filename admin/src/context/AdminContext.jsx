@@ -24,28 +24,28 @@ const AdminContextProvider = (props) => {
     }
 
 
-    // const changeAvailability = async (docId) => {
-    //     try {
-    //         const { data } = await axios.post(backendUrl + '/api/admin//change-availability', { docId }, {
-    //             headers: {
-    //                 'atoken': aToken,
-    //                 'Content-Type': 'multipart/form-data'
-    //             }
-    //         })
-    //         if (data.success) {
-    //             toast.success(data.message);
-    //             getAllDoctors();
-    //         }
-    //         else {
-    //             toast.error(data.message)
-    //         }
-    //     } catch (error) { toast.error(error.message) }
-    // }
+    const changeAvailability = async (docId) => {
+        try {
+            const { data } = await axios.post(backendUrl + '/api/admin//change-availability', { docId }, {
+                headers: {
+                    'atoken': aToken,
+                    // 'Content-Type': 'application/json', 
+                }
+            })
+            if (data.success) {
+                toast.success(data.message);
+                getAllDoctors();
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) { toast.error(error.message) }
+    }
 
     //then we have to add it in this value property so that we can access it in any component
     const value = {
         aToken, setAToken, backendUrl, getAllDoctors, doctors,
-        // changeAvailability
+        changeAvailability
 
     }
     return (
