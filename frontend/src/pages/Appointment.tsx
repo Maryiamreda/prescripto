@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { doctors } from '../assets/assets_frontend/assets'
 import { Doctor } from "../Doctors";
 import Verified from '../assets/assets_frontend/verified_icon.svg';
 import Info from '../assets/assets_frontend/info_icon.svg';
 import Relatedoctors from "../components/Relatedoctors";
+import { AppContext } from "../context/AppContext";
 
 const Appointments = () => {
+    const { doctors } = useContext(AppContext);
+
     const { doctorId } = useParams<{ doctorId: string }>();
     const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     const [doctor, setDoctor] = useState<Doctor | null>(null)
@@ -76,7 +78,7 @@ const Appointments = () => {
                             <img src={Verified} className="w-5" />
                         </div>
                         <div className="flex md:justify-start mt-1 gap-2 text-gray-600">
-                            <h3 className="">{doctor?.degree} - {doctor?.speciality}</h3>
+                            <h3 className="">{doctor?.degree} - {doctor?.specialty}</h3>
 
                             <div className="text-xs flex items-center rounded-xl px-2  border border-gray-200 cursor-pointer">{doctor?.experience}</div>
                         </div>
@@ -125,7 +127,7 @@ const Appointments = () => {
                 </div>
             </div>
 
-            <Relatedoctors doctorId={doctorId} speciality={doctor?.speciality} />
+            <Relatedoctors doctorId={doctorId} speciality={doctor?.specialty} />
         </div>);
 }
 export default Appointments;

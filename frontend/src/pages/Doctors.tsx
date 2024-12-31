@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { doctors } from '../assets/assets_frontend/assets'
 import { specialityData } from '../assets/assets_frontend/assets'
 import { AppContext } from "../context/AppContext";
 
@@ -14,7 +13,8 @@ const DoctorsPage = () => {
     useEffect(() => {
         if (speciality) {
             // Filter doctors by speciality
-            setData(doctors.filter((doctor) => doctor.speciality === speciality));
+
+            setData(doctors.filter((doctor) => doctor.specialty === speciality));
         } else {
             // Reset to all doctors if no speciality is selected
             setData(doctors);
@@ -39,13 +39,6 @@ const DoctorsPage = () => {
                             ))}
                         </div>
                     )}
-
-
-
-
-
-
-
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
@@ -63,11 +56,18 @@ const DoctorsPage = () => {
                             />
                             <div className='px-5 py-2 text-start'>
                                 <div className='flex items-center text-center gap-2'>
-                                    <p className='bg-green-500 rounded-full w-2 h-2'></p>
-                                    <p className='text-green-500 text-sm'>Available</p>
-                                </div>
+                                    <p
+                                        className={`rounded-full w-2 h-2 ${doctor.available ? "bg-green-500" : "bg-gray-500"
+                                            }`}
+                                    ></p>
+                                    <p
+                                        className={`text-sm ${doctor.available ? "text-green-500" : "text-gray-500"
+                                            }`}
+                                    >
+                                        {doctor.available ? "Available" : "Not Available"}
+                                    </p>                                </div>
                                 <h2 className='text-base font-semibold'>{doctor.name}</h2>
-                                <p className='text-gray-600 text-sm'>{doctor.speciality}</p>
+                                <p className='text-gray-600 text-sm'>{doctor.specialty}</p>
                             </div>
                         </Link>
                     ))}</div>

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { doctors } from "../assets/assets_frontend/assets";
+import { useContext, useEffect, useState } from "react";
 import { Doctor } from "../Doctors";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 interface RelatedoctorsProps {
     doctorId: string | undefined;  // doctorId can be a string or undefined
@@ -10,11 +10,12 @@ interface RelatedoctorsProps {
 
 const Relatedoctors: React.FC<RelatedoctorsProps> = ({ doctorId, speciality }) => {
     const [relatedDocs, setRelatedDocs] = useState<Doctor[]>([]);  // Correct state type to Doctor[]
+    const { doctors } = useContext(AppContext);
 
     useEffect(() => {
         if (speciality) {  // Ensure speciality is defined before filtering
             const docInfo = doctors.filter(
-                (doc) => doc.speciality === speciality && doc._id !== doctorId
+                (doc) => doc.specialty === speciality && doc._id !== doctorId
             );
             setRelatedDocs(docInfo);
         }
@@ -37,7 +38,7 @@ const Relatedoctors: React.FC<RelatedoctorsProps> = ({ doctorId, speciality }) =
                                 <div className='flex items-center text-center gap-2'> <p className='bg-green-500 rounded-full w-2 h-2 '></p><p className='text-green-500 text-sm'>Available</p>
                                 </div>
                                 <h2 className='text-base font-semibold'>{doctor.name}</h2>
-                                <p className='text-gray-600 text-sm'>{doctor.speciality}</p>
+                                <p className='text-gray-600 text-sm'>{doctor.specialty}</p>
                             </div>
 
                         </Link>
