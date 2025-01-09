@@ -1,17 +1,44 @@
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 const LogIn = () => {
+
+    const { token, setToken, backendUrl } = useContext(AppContext)
     const [state, setState] = useState('Sign Up')
     const [email, setEmail] = useState('')
-    const [password] = useState('')
+    const [password, setPassword] = useState('')
     const [name, setName] = useState('')
 
-    // const onSubmitHandler = async (event: React.FormEvent) => {
-    //     event.preventDefault()
+    const onSubmitHandler = async (event: React.FormEvent) => {
+        event.preventDefault()
+        try {
+            if (state === 'Sign Up') {
+                const { data } = await axios.post(backendUrl + '/api/user/register', { password, email })
+                if (data.success) {
+                    localStorage.setItem('token', data.token)
+                    setToken(data.token)
+                } else {
+                    toast.error(data.message)
+                }
+            } else {
+                const { data } = await axios.post(backendUrl + '/api/user/login', { name, password, email })
+                if (data.success) {
+                    localStorage.setItem('token', data.token)
+                    setToken(data.token)
+                } else {
+                    toast.error(data.message)
+                }
+            }
+        } catch (error: any) {
+            toast.error(error.message)
 
-    // }
-    const toggleState = () => {
+        }
+
+    }
+    const toggleState = async () => {
         setState(state === 'Sign Up' ? 'Log In' : 'Sign Up');
+
     };
 
     return (
@@ -33,10 +60,10 @@ const LogIn = () => {
                 </div>
                 <div className="w-full">
                     <p className="text-start">password</p>
-                    <input type="text" className="mt-1 border  w-full rounded p-2" onChange={(e) => setEmail(e.target.value)}
+                    <input type="text" className="mt-1 border  w-full rounded p-2" onChange={(e) => setPassword(e.target.value)}
                         value={password} />
                 </div>
-                <button className="bg-primary text-white w-full py-2 my-2 rounded-md text-base">{state === 'Sign Up' ? "Craete Account" : "Login"}</button>
+                <button type="submit" className="bg-primary text-white w-full py-2 my-2 rounded-md text-base">{state === 'Sign Up' ? "Craete Account" : "Login"}</button>
 
                 {state === 'Sign Up' ? <p >Already have an account? <span className="cursor-pointer  text-primary underline" onClick={toggleState} >Log In</span></p> :
                     <p>Don't have an account?<span className="cursor-pointer text-primary underline" onClick={toggleState} >Sign Up</span> </p>}

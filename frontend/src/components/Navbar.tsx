@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Logo from '../assets/assets_frontend/logo.svg';
 import ProfilePic from '../assets/assets_frontend/profile_pic.jpg';
 import MenuIcon from '../assets/assets_frontend/menu_icon.svg';
@@ -6,13 +6,17 @@ import CrossIcon from '../assets/assets_frontend/cross_icon.png';
 
 import DropDownIcon from "../assets/assets_frontend/dropdown_icon.svg";
 import { NavLink, useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 const NavBar = () => {
     const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const [selectedOption, setSelectedOption] = useState(false);
 
-    const [token, setToken] = useState(true)
-
+    const { token, setToken } = useContext(AppContext)
+    const logout = () => {
+        setToken('');
+        localStorage.removeItem('token')
+    }
     const toggleMenu = (e: { stopPropagation: () => void; }) => {
         e.stopPropagation(); // Prevent event propagation
         setSelectedOption(!selectedOption);
@@ -53,7 +57,7 @@ const NavBar = () => {
                         <div className='min-w-48 rounded p-4 gap-4 bg-stone-50 flex flex-col items-start '>
                             <p onClick={() => navigate('/my-profile')} className='hover:text-black'>My Profile</p>
                             <p onClick={() => navigate('/my-appointments')} className='hover:text-black' >My Appointments</p>
-                            <p onClick={() => setToken(false)} className='hover:text-black'>Logout</p>
+                            <p onClick={logout} className='hover:text-black'>Logout</p>
                         </div>
 
                     </div>

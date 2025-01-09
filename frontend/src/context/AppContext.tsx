@@ -8,12 +8,18 @@ import { Doctor } from "../Doctors"; // Adjust the path based on your folder str
 interface AppContextType {
     doctors: Doctor[];
     getAllDoctors: () => Promise<void>;
+    token: string | boolean; // Add token
+    setToken: (token: string) => void; // Add setToken
+    backendUrl: string; // Add backendUrl
 }
 
 // Initial value for context
 const defaultValue: AppContextType = {
     doctors: [],
     getAllDoctors: async () => { },
+    token: '',
+    setToken: () => { },
+    backendUrl: ''
 };
 
 // Create context
@@ -26,6 +32,8 @@ interface AppContextProviderProps {
 
 const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => {
     const [doctors, setDoctors] = useState<Doctor[]>([]);
+    const [token, setToken] = useState('');
+
     const backendUrl = import.meta.env.VITE_BACKEND_URL as string;
     const getAllDoctors = async () => {
         try {
@@ -48,6 +56,7 @@ const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => 
     const value = {
         doctors,
         getAllDoctors,
+        token, setToken, backendUrl
     };
 
     useEffect(() => {
