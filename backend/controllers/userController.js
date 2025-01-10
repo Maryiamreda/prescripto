@@ -64,4 +64,27 @@ const getProfile = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 }
-export { registerUser, loginUser, getProfile }
+const updatetProfile = async (req, res) => {
+
+    try {
+        const { userId, name, phone, address, dob, gender } = req.body;
+        const imageFile = req.file;
+        if (!userId || !name || !phone || !address || !dob || !gender) {
+            return res.json({ success: false, message: "Data Missing" })
+
+        }
+
+        await userModel.findByIdAndUpdate(userId, { name, phone, address: JSON.parse(address), dob, gender });
+        if (imageFile) {
+            //upload image to cloudinary
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+            const imageUrl = imageUpload.secure_url;
+            await userModel.findByIdAndUpdate(userId, { image: imageUrl })
+        }
+        res.json({ success: true, message: "Profile Updated" });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message })
+    }
+}
+export { registerUser, loginUser, getProfile, updatetProfile }

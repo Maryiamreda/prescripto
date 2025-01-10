@@ -13,9 +13,7 @@ const authUser = async (req, res, next) => {
         // Check if the decoded email matches the admin's email
         req.body.userId = token_decode.id
 
-
         next(); //this's like a "continue" button in Express middleware:
-
     }
     catch (error) {
         console.log(error);
