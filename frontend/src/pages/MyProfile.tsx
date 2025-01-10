@@ -1,22 +1,9 @@
-import { useState } from "react";
-import ProfilePic from '../assets/assets_frontend/profile_pic.jpg';
+import { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
 const ProfilePage = () => {
-    const [userData, setUserData] = useState({
-        name: "cookie",
-        image: ProfilePic,
-        email: "cookie@gmail.com",
-        phone: '+12345',
-        address: {
-            line1: "245 East 73rd Street",
-            line2: "Apartment 4A",
-
-        },
-        gender: "female",
-        dob: 'May 4, 1929'
-
-    })
+    const { userData, setUserData } = useContext(AppContext)
     const [isEdit, setIsEdit] = useState(false)
-    return (
+    return userData && (
         <div className="max-w-lg mt-10 mb-36 flex  text-[#363636] flex-col gap-2 text-sm text-start">
             <img className="w-36 rounded" src={userData.image} />
             {
